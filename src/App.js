@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+
+  Route, Switch
+} from "react-router-dom";
 import './App.css';
+import Header from './components/Header/Header';
+import NotFound from './components/not-found/NotFound';
+import PostDetails from './components/post-details/PostDetails';
+import PostList from './components/post-list/PostList';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Header></Header>
+        <Switch>
+          <Route path="/posts">
+            <PostList></PostList>
+          </Route>
+          <Route exact path="/">
+            <PostList></PostList>
+          </Route>
+          <Route path="/post/:postId">
+            <PostDetails></PostDetails>
+          </Route>
+          <Route path="*">
+            <NotFound></NotFound>
+          </Route>
+        </Switch>
+      </Router>
+
     </div>
   );
 }
